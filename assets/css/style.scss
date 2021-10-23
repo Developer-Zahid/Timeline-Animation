@@ -1,0 +1,210 @@
+// SCSS Variables
+$text-color: #ffffff;
+$bg-color: #0b0b0b;
+$progressbar-color: #2c2c2c;
+$progress-color: #b25d46,#a74141,#743879,#4a3ca0;
+$primary-font: 'Zen Old Mincho', serif;
+
+/* Google Fonts Link */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700;900&display=swap');
+
+/* Reset CSS */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html{
+    font-size: clamp(8px, 1vw, 10px);
+    scrollbar-width: thin;
+    scrollbar-color: $progressbar-color $bg-color;
+    &::-webkit-scrollbar{
+        width: 8px;
+    }
+    &::-webkit-scrollbar-track{
+        background-color: $bg-color;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: $progressbar-color;
+    }
+}
+
+body{
+    color: $text-color;
+    background-color: $bg-color;
+    font-size: 1.6rem;
+    font-family: $primary-font;
+}
+h1,h2{
+    font-weight: 900;
+}
+
+/* Container Style */
+.container{
+    width: 100%;
+    max-width: 1140px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Primary Button Style */
+.primary-btn{
+    display: inline-block;
+    color: $text-color;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 1.5rem 2rem;
+    border: 1px solid $text-color;
+    text-decoration: none;
+    margin-top: 1rem;
+    box-shadow:
+        2px 2px 0 $bg-color,
+        0.3em 0.3em 0 $text-color;
+    transition: all ease-in-out .4s;
+
+    &:hover,
+    &:focus{
+        color: $bg-color;
+        background-color: $text-color;
+        box-shadow:
+            2px 2px 0 $bg-color,
+            0.3em 0.3em 0 $progressbar-color;
+    }
+}
+
+/* Common Banner and Footer Section Style */
+.banner,
+.footer{
+    text-align: center;
+    padding: 10rem 0;
+    background-color: $bg-color;
+    &__title{
+        font-size: 4rem;
+        @media screen and (min-width: 600px) {
+            font-size: 5rem;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media screen and (min-width: 780px) {
+            font-size: 6rem;
+        }
+    }
+    &__text{
+        margin: 2rem auto;
+        @media screen and (min-width: 500px) {
+            font-size: 2rem;
+        }
+        @media screen and (min-width: 600px) {
+            max-width: 60%;
+        }
+    }
+}
+
+/* Banner Section Style */
+.banner{
+    &__sub-title{
+        font-size: 3rem;
+        background: linear-gradient(to left, $progress-color);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+/* Timeline Section Style */
+.timeline{
+    position: relative;
+    &__progressbar{
+        --width: 2px;
+        --left: calc(((15vw / 2) + 15px) - (var(--width) / 2));
+        position: absolute;
+        left: var(--left);
+        width: var(--width);
+        height: 100%;
+        background-color: $progressbar-color;
+        z-index: -1;
+        &::after{
+            content: "";
+            position: fixed;
+            top: 0;
+            left: var(--left);
+            width: var(--width);
+            height: 50vh;
+            background: linear-gradient($progress-color);
+        }
+        @media screen and (min-width: 800px) {
+            --width: 3px;
+            --left: calc(50% - (var(--width) / 2));
+        }
+    }
+    &__block{
+        display: grid;
+        grid-template-columns: 15vw 1fr;
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+        align-items: start;
+        @media screen and (min-width: 800px) {
+            grid-template-columns: 1fr 15vh 1fr;
+        }
+        &__head{
+            @media screen and (min-width: 800px) {
+                grid-column: 1 / 2;
+                text-align: right;
+                position: sticky;
+                top: 50vh;
+            }
+        }
+        &__body{
+            grid-column: 2 / -1;
+            @media screen and (min-width: 800px) {
+                grid-column: 3 / -1;
+            }
+        }
+        &__bullet-point{
+            position: sticky;
+            top: 50vh;
+            display: flex;
+            justify-content: center;
+            @media screen and (min-width: 800px) {
+                grid-column: 2 / 3;
+            }
+        }
+        &__circle{
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            border: 4px solid $bg-color;
+            background-color: $text-color;
+            border-radius: 50%;
+        }
+        &__title{
+            font-size: 3rem;
+            @media screen and (max-width: 799px) {
+                margin-top: -1.5rem;
+                margin-bottom: 2rem;
+            }
+            @media screen and (min-width: 800px) {
+               line-height: 0;
+            }
+        }
+        &__text{
+            font-size: 1.6rem;
+            @media screen and (min-width: 500px) {
+                font-size: 1.8rem;
+            }
+        }
+    }
+    &__hider{
+        position: sticky;
+        bottom: -2px;
+        width: 100%;
+        height: 50vh;
+        background: linear-gradient(transparent, $bg-color);
+        pointer-events: none;
+    }
+}
